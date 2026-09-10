@@ -1,0 +1,123 @@
+# PHOENX Source of Truth
+
+Status: APPROVED BASELINE — PHX-M0
+
+## Product identity
+
+- Product name: **PHOENX**
+- Primary domain: **phoenx.online**
+- Category: **Live Commerce Growth Operating System**
+- Positioning: One system for stores, creators, content, media buying, live selling, attribution, finance, and profitable growth.
+- Technology / engineering incubator: **Craniumtek Solutions Inc.**
+
+PHOENX is a separate product boundary. It is not a module of Craniumtek corporate systems, Morning Breaks Global, or iBayong.
+
+## Separation policy
+
+PHOENX SHALL have independent:
+
+- GitHub organization and canonical repository
+- application source tree
+- database
+- authentication and authorization boundary
+- runtime secrets
+- storage volumes / object storage
+- Docker project / containers
+- CI/CD pipeline and self-hosted runner
+- logging and observability boundary
+- backups and restore procedures
+- deployment lifecycle
+
+Cross-product interaction with Craniumtek, Morning Breaks Global, and iBayong SHALL use explicit APIs, events, webhooks, imports/exports, or other documented integration contracts. Shared application tables or shared runtime secrets are prohibited.
+
+## Relationship to other products
+
+### Craniumtek Solutions Inc.
+Craniumtek is PHOENX's technology / engineering incubator and may own, build, operate, support, or commercialize PHOENX. PHOENX remains product-operationally independent.
+
+### Morning Breaks Global
+MBG is an external client/integration from PHOENX's perspective. MBG-specific teachers, students, classes, packages, and education workflows SHALL NOT become PHOENX domain models.
+
+### iBayong
+iBayong is an external marketplace/integration from PHOENX's perspective. iBayong buyer, seller, marketplace listing, and marketplace transaction records SHALL remain in iBayong. PHOENX may consume approved commerce data through integration contracts.
+
+## Six product pillars
+
+1. **Store & Marketplace Growth** — products, catalogs, listings, inventory, offers, orders, marketplace operations and growth.
+2. **Creator, Affiliate & Talent Network** — creators, live sellers, affiliates, recruitment, product matching, commissions and performance.
+3. **Content & Creative Production** — briefs, scripts, UGC, video, assets, approvals, publishing and creative performance.
+4. **Performance Marketing, Paid Ads & Media Buying** — media plans, budgets, bidding, amplification, pacing, optimization, attribution, ROAS, CAC, CPO and GMV.
+5. **Live Selling Operations** — hosts, schedules, products, scripts, studio operations, live sessions, traffic amplification, QA and conversion.
+6. **Commerce Intelligence, Finance & Attribution** — revenue, costs, commissions, settlements, attribution, profitability, forecasting and executive reporting.
+
+## V1 wedge
+
+The deepest V1 capability is **Live Selling Operations**, connected to creators, content, media buying, products/orders, and an attribution ledger. PHOENX should not attempt to become a general ERP or consumer marketplace in V1.
+
+## Canonical shared PHOENX entities
+
+- organizations
+- brands
+- stores
+- marketplaces
+- products
+- catalogs
+- inventory
+- creators
+- affiliates
+- hosts
+- campaigns
+- content_assets
+- live_sessions
+- media_plans
+- ad_campaigns
+- media_budget_ledger
+- orders
+- attributions
+- commissions
+- settlements
+- costs
+- revenue
+
+## Architecture baseline
+
+Target application architecture:
+
+- Laravel modular monolith
+- PostgreSQL authoritative database
+- Redis for cache / queues / locks where justified
+- browser-responsive operations interface / PWA first
+- object storage for media/evidence
+- Docker-isolated environments
+- self-hosted GitHub Actions for controlled CI/CD
+- separate DEV, staging, and production runtime boundaries
+
+The existing November 2025 repository scaffold is historical and is NOT automatically authoritative for runtime architecture. Legacy assumptions such as MariaDB 10.6, placeholder passwords, direct public DEV binds, and old Droplet auto-deploy instructions require explicit revalidation before reuse.
+
+## Domain baseline
+
+Primary brand/domain identity:
+
+- `phoenx.online` — public product domain
+- `www.phoenx.online` — public marketing site if required
+- `app.phoenx.online` — application
+- `api.phoenx.online` — API when required
+- `admin.phoenx.online` — platform administration when separation is justified
+
+Subdomains SHALL only be activated when the corresponding service exists and is independently secured.
+
+## GitHub target
+
+Target organization: **PHOENX** (subject to GitHub handle availability at creation time).
+
+Initial canonical repository target should stay simple, preferably a single modular-monolith repository such as:
+
+- `phoenx/phoenx`
+
+Additional repositories should be created only when a concrete ownership, release, security, or lifecycle boundary justifies them.
+
+## Migration rule
+
+The historical `melvin826/phoenix-enterprise-core` repository SHALL be preserved until a verified migration transfers all required Git history and source-of-truth content into the new PHOENX organization repository.
+
+No production deployment is authorized by this source-of-truth update alone.
