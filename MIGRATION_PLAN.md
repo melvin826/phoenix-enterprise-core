@@ -1,0 +1,112 @@
+# PHOENX GitHub Organization + Domain Migration Plan
+
+Status: PHX-M0 execution plan
+
+## Goal
+
+Move PHOENX from the historical personal repository into an independent GitHub organization while preserving Git history and keeping Craniumtek, Morning Breaks Global, and iBayong untouched.
+
+## Target identity
+
+- Brand: PHOENX
+- Primary domain: `phoenx.online`
+- Target GitHub organization: `PHOENX` / `phoenx` handle if available
+- Initial canonical repository: `phoenx/phoenx`
+
+## Gate 1 — Create organization
+
+Create the GitHub organization from the GitHub UI because the currently connected GitHub integration does not expose organization-creation administration.
+
+Recommended settings:
+
+- organization display name: PHOENX
+- organization handle: `phoenx` if available
+- billing: Free unless a paid capability is explicitly required
+- base repository permission: None or Read
+- require 2FA for organization members when feasible
+- do not invite contractors before teams/permissions are defined
+
+## Gate 2 — Create canonical repository
+
+Inside the new organization, create a private repository named `phoenx` initially unless public-source publication is explicitly intended.
+
+Do not initialize it with unrelated scaffold content if the migration will push existing Git history into it.
+
+## Gate 3 — Preserve repository history
+
+The historical source repository is:
+
+`melvin826/phoenix-enterprise-core`
+
+Preferred migration methods, in order:
+
+1. GitHub repository transfer from the personal account into the PHOENX organization, followed by a repository rename to `phoenx`, if transfer permissions and desired visibility allow it.
+2. If transfer is unsuitable, mirror-push all refs/tags to the new canonical repository and verify commit/tag parity before declaring the old repository historical.
+
+Never delete the old repository until the migration gate is fully verified.
+
+## Gate 4 — Verification
+
+Verify:
+
+- complete commit history preserved
+- default branch correct
+- tags preserved
+- open issues / PRs handled deliberately
+- Actions workflows reviewed before enabling
+- repository visibility intentionally selected
+- no legacy secrets transferred blindly
+- no hard-coded placeholder credentials retained as active configuration
+- `SOURCE_OF_TRUTH.md` and `ADR-0001` exist in canonical repo
+
+## Gate 5 — Runtime separation
+
+PHOENX runtime should use dedicated resources:
+
+- Linux user: `phoenix` or renamed `phoenx` when operationally practical
+- dedicated project path, e.g. `/srv/phoenx`
+- Docker project name: `phoenx`
+- PostgreSQL database: dedicated PHOENX database
+- PHOENX-only environment/secrets
+- PHOENX-only object storage namespace
+- PHOENX-only backup repository/path
+- PHOENX self-hosted GitHub Actions runner
+
+Do not share MBG or iBayong production credentials, containers, volumes, or deployment jobs.
+
+## Gate 6 — Domain activation
+
+Use `phoenx.online` as the primary public domain.
+
+Recommended service mapping:
+
+- `phoenx.online` / `www.phoenx.online` -> public site
+- `app.phoenx.online` -> application
+- `api.phoenx.online` -> API only when needed
+- `admin.phoenx.online` -> admin surface only when separately justified
+
+Before DNS cutover:
+
+- confirm domain registrar ownership/access
+- identify DNS provider
+- configure TLS through the selected edge/reverse-proxy approach
+- verify no existing production service is displaced
+- use least-privilege origin exposure
+- validate HTTP redirects and canonical host
+
+## Gate 7 — Historical repository retirement
+
+Only after migration verification:
+
+- update old repository README to point to the canonical PHOENX organization repository
+- optionally archive the old repository if it remains separate
+- never delete it solely for cleanup unless history and references are conclusively preserved
+
+## Explicit non-goals for PHX-M0
+
+- no production deployment
+- no MBG changes
+- no iBayong changes
+- no Craniumtek production changes
+- no DNS cutover until ownership and target runtime are verified
+- no activation of legacy Docker/deploy scaffold
