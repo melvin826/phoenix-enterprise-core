@@ -4,6 +4,8 @@
 
 Primary domain: **phoenx.online**
 
+GitHub organization display name: **PHOENIX**
+
 Technology / engineering incubator: **Craniumtek Solutions Inc.**
 
 ## Current authority
@@ -28,6 +30,11 @@ Integrations with those products must use explicit APIs/events/contracts rather 
 
 ## Migration target
 
-The intended end state is a dedicated **PHOENX GitHub organization** with a canonical PHOENX repository while preserving the full history of this legacy repository.
+The intended end state is a dedicated **PHOENIX GitHub organization** with a canonical PHOENX repository while preserving the full history of this legacy repository.
+
+The organization display name and product domain are intentionally distinct values:
+
+- GitHub organization display name: **PHOENIX**
+- Product domain: **phoenx.online**
 
 No production deployment is authorized by this documentation change.
