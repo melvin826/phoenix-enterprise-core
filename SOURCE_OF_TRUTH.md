@@ -1,6 +1,6 @@
 # PHOENIX Source of Truth
 
-Status: APPROVED BASELINE — PHX-M0
+Status: APPROVED BASELINE — PHX-M0.6
 
 ## Product identity
 
@@ -11,6 +11,17 @@ Status: APPROVED BASELINE — PHX-M0
 - Technology / engineering incubator: **Craniumtek Solutions Inc.**
 
 PHOENIX is a separate product boundary. It is not a module of Craniumtek corporate systems, Morning Breaks Global, or iBayong.
+
+## Canonical GitHub identity
+
+- GitHub organization display name: **PHOENIX**
+- GitHub organization handle: **`phoenx-online`**
+- Canonical repository: **`phoenx-online/phoenix`**
+- Repository numeric ID: **`1094814392`**
+- Default branch: **`main`**
+- Current repository visibility: **public** pending a deliberate visibility decision
+
+The native GitHub transfer and repository rename are complete. Both the former personal path `melvin826/phoenix-enterprise-core` and the pre-rename organization path `phoenx-online/phoenix-enterprise-core` resolve to the canonical repository.
 
 ## Separation policy
 
@@ -39,7 +50,7 @@ Craniumtek is PHOENIX's technology / engineering incubator and may own, build, o
 MBG is an external client/integration from PHOENIX's perspective. MBG-specific teachers, students, classes, packages, and education workflows SHALL NOT become PHOENIX domain models.
 
 ### iBayong
-iBayong is an external marketplace/integration from PHOENIX's perspective. iBayong buyer, seller, marketplace listing, and marketplace transaction records SHALL remain in iBayong. PHOENIX may consume approved commerce data through integration contracts.
+iBayong is an external marketplace/integration from PHOENIX's perspective. iBayong buyer, seller, marketplace listing, and marketplace transaction records SHALL remain in iBayong. PHOENIX may consume approved commerce data only through documented integration contracts.
 
 ## Six product pillars
 
@@ -92,7 +103,9 @@ Target application architecture:
 - self-hosted GitHub Actions for controlled CI/CD
 - separate DEV, staging, and production runtime boundaries
 
-The existing November 2025 repository scaffold is historical and is NOT automatically authoritative for runtime architecture. Legacy assumptions such as MariaDB 10.6, placeholder passwords, direct public DEV binds, and old Droplet auto-deploy instructions require explicit revalidation before reuse.
+The existing November 2025 scaffold is historical and is NOT automatically authoritative for runtime architecture. In particular, the current `docker-compose.yml`, `Dockerfile`, `.env.example`, old Nginx files, and any legacy deploy material require explicit modernization before runtime use.
+
+The obsolete GitHub Actions workflow that auto-deployed every `main` push to a DigitalOcean droplet as `root` has been physically removed. No automatic deployment from `main` is currently authorized.
 
 ## Domain baseline
 
@@ -102,59 +115,50 @@ Primary product/domain identity:
 - `www.phoenx.online` — public marketing site if required
 - `app.phoenx.online` — application
 - `api.phoenx.online` — API when required
-- `admin.phoenx.online` — platform administration when separation is justified
+- `admin.phoenx.online` — platform administration when separately justified
 
 The intentional spelling difference is authoritative: the **product/brand is PHOENIX**, while the **domain is phoenx.online**.
 
 Subdomains SHALL only be activated when the corresponding service exists and is independently secured.
 
-## GitHub target
+## DEV runtime baseline
 
-Canonical GitHub organization display name: **PHOENIX**.
+Independent DEV preparation SHALL follow `DEV_RUNTIME_BASELINE.md`.
 
-Canonical GitHub organization account handle / URL slug: **`phoenx-online`**.
+Key rules:
 
-Canonical organization URL: **`https://github.com/phoenx-online`**.
+- use a PHOENIX-only Linux/service account where practical
+- canonical DEV checkout path: `/home/projects/phoenix` unless the verified development host requires another documented path
+- Docker project namespace: `phoenix-dev`
+- PostgreSQL database: `phoenix_dev`
+- Redis isolated to PHOENIX DEV
+- PHOENIX-only secrets and environment files
+- self-hosted GitHub Actions runner dedicated to PHOENIX DEV
+- no GitHub-hosted runner requirement for normal PHOENIX CI/CD
+- no MBG, iBayong, or Craniumtek production credentials, volumes, databases, or deployment jobs
+- no production deployment until a separate production gate is approved and verified
 
-The GitHub app/connector is installed and authorized for the `phoenx-online` organization.
+## Current migration state
 
-Current transferred repository:
+Completed:
 
-- **`phoenx-online/phoenix-enterprise-core`**
+1. PHOENIX organization created.
+2. GitHub integration connected to `phoenx-online`.
+3. Native repository transfer completed without changing repository ID.
+4. Repository renamed to the canonical `phoenx-online/phoenix` path.
+5. PR and branch continuity verified.
+6. Obsolete automatic DigitalOcean deployment workflow removed.
+7. Old personal and pre-rename repository paths resolve to the canonical repository.
 
-Canonical repository target after rename:
+Pending deliberate decisions / work:
 
-- **`phoenx-online/phoenix`**
+- repository visibility review: keep public or change to private
+- modernization of the legacy application/runtime scaffold
+- independent DEV host verification and bootstrap
+- self-hosted PHOENIX DEV runner setup
+- test/CI baseline
+- staging architecture
+- production architecture and capacity gate
+- DNS activation only after a real secured target exists
 
-Additional repositories should be created only when a concrete ownership, release, security, or lifecycle boundary justifies them.
-
-## Transfer verification
-
-Native GitHub repository transfer from `melvin826/phoenix-enterprise-core` to `phoenx-online/phoenix-enterprise-core` is complete.
-
-Verified after transfer:
-
-- GitHub repository numeric ID remained **`1094814392`**, confirming repository continuity rather than recreation.
-- repository owner is **`phoenx-online`**.
-- repository name is currently **`phoenix-enterprise-core`** pending the final rename.
-- default branch remains **`main`**.
-- latest verified `main` commit before the PHX-M0.5 safety branch is **`0a39b812aa076c8fe041caf45c76878eabc821a6`**.
-- branches visible after transfer: `main`, `phx-m0-1-org-name-phoenix`, `phx-m0-2-brand-phoenix`, `phx-m0-3-lock-org-handle`, `phx-m0-4-integration-connected`, `phx-m0-source-of-truth-separation-v1`.
-- pull requests **#1 through #5** are preserved under the new organization.
-- the old `melvin826/phoenix-enterprise-core` path resolves to the transferred repository.
-- current repository visibility is **public** and requires deliberate review before any visibility change.
-- tag enumeration was not independently available through the current connector action set; no destructive tag operation is authorized.
-
-## Legacy execution safety
-
-The transferred repository contained `.github/workflows/deploy.yml`, a historical workflow that auto-deployed every push to `main` to a DigitalOcean droplet as `root` using `ubuntu-latest` and legacy `/var/www/phoenix` assumptions.
-
-That workflow is obsolete and is being physically removed in PHX-M0.5 before further `main` development work. No legacy production deployment is authorized.
-
-## Migration rule
-
-The ownership transfer is complete. The next owner/UI gate is to rename `phoenx-online/phoenix-enterprise-core` to **`phoenx-online/phoenix`**.
-
-After rename, verify repository redirects, branch/PR continuity, source-of-truth files, workflow safety, and canonical references before beginning independent PHOENIX DEV runtime work.
-
-No production deployment is authorized by this source-of-truth update alone.
+No production deployment is authorized by this source of truth.
