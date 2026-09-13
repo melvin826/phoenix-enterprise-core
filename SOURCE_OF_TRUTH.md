@@ -118,18 +118,43 @@ Canonical organization URL: **`https://github.com/phoenx-online`**.
 
 The GitHub app/connector is installed and authorized for the `phoenx-online` organization.
 
-Initial canonical repository should stay simple, preferably a single modular-monolith repository named:
+Current transferred repository:
 
-- `phoenix`
+- **`phoenx-online/phoenix-enterprise-core`**
 
-Canonical repository path: **`phoenx-online/phoenix`**.
+Canonical repository target after rename:
+
+- **`phoenx-online/phoenix`**
 
 Additional repositories should be created only when a concrete ownership, release, security, or lifecycle boundary justifies them.
 
+## Transfer verification
+
+Native GitHub repository transfer from `melvin826/phoenix-enterprise-core` to `phoenx-online/phoenix-enterprise-core` is complete.
+
+Verified after transfer:
+
+- GitHub repository numeric ID remained **`1094814392`**, confirming repository continuity rather than recreation.
+- repository owner is **`phoenx-online`**.
+- repository name is currently **`phoenix-enterprise-core`** pending the final rename.
+- default branch remains **`main`**.
+- latest verified `main` commit before the PHX-M0.5 safety branch is **`0a39b812aa076c8fe041caf45c76878eabc821a6`**.
+- branches visible after transfer: `main`, `phx-m0-1-org-name-phoenix`, `phx-m0-2-brand-phoenix`, `phx-m0-3-lock-org-handle`, `phx-m0-4-integration-connected`, `phx-m0-source-of-truth-separation-v1`.
+- pull requests **#1 through #5** are preserved under the new organization.
+- the old `melvin826/phoenix-enterprise-core` path resolves to the transferred repository.
+- current repository visibility is **public** and requires deliberate review before any visibility change.
+- tag enumeration was not independently available through the current connector action set; no destructive tag operation is authorized.
+
+## Legacy execution safety
+
+The transferred repository contained `.github/workflows/deploy.yml`, a historical workflow that auto-deployed every push to `main` to a DigitalOcean droplet as `root` using `ubuntu-latest` and legacy `/var/www/phoenix` assumptions.
+
+That workflow is obsolete and is being physically removed in PHX-M0.5 before further `main` development work. No legacy production deployment is authorized.
+
 ## Migration rule
 
-The historical `melvin826/phoenix-enterprise-core` repository SHALL be preserved until a verified migration transfers all required Git history and source-of-truth content into the new **PHOENIX** GitHub organization repository.
+The ownership transfer is complete. The next owner/UI gate is to rename `phoenx-online/phoenix-enterprise-core` to **`phoenx-online/phoenix`**.
 
-Current migration gate: the GitHub connector can manage repositories after they exist in `phoenx-online`, but it does not expose repository-transfer or repository-creation administration. The owner must therefore complete the one-time repository transfer in GitHub UI. After transfer, automated verification and repository management may continue through the connector.
+After rename, verify repository redirects, branch/PR continuity, source-of-truth files, workflow safety, and canonical references before beginning independent PHOENIX DEV runtime work.
 
 No production deployment is authorized by this source-of-truth update alone.
