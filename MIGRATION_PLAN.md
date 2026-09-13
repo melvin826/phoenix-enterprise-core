@@ -34,37 +34,49 @@ Canonical organization settings:
 
 ## Gate 1A — Connect GitHub integration
 
-**CURRENT BLOCKER.** The connected GitHub app is not yet installed/authorized for the `phoenx-online` organization.
+**COMPLETED.** The GitHub app/connector is installed and authorized for `phoenx-online` with repository access enabled.
 
-Before automated migration, install/authorize the GitHub integration for this organization and grant access to the repository that will become canonical. Do not grant access to unrelated repositories unless needed.
+Verified state at completion:
 
-## Gate 2 — Canonical repository
+- organization installation exists
+- repository selection: all repositories
+- organization currently contains zero repositories
 
-Preferred target is a private repository named `phoenix` inside the **PHOENIX** organization unless public-source publication is explicitly intended.
+## Gate 2 — Transfer canonical repository
 
-Do not initialize an unrelated scaffold if the historical repository will be transferred or mirror-migrated into it.
+**CURRENT OWNER/UI GATE.** The connector does not expose GitHub repository-transfer or repository-creation administration.
+
+Preferred migration path:
+
+1. Transfer `melvin826/phoenix-enterprise-core` into the `phoenx-online` organization through GitHub repository settings.
+2. Preserve all Git history, branches, tags, issues, pull requests, and redirects during transfer.
+3. After transfer completes, rename the repository from `phoenix-enterprise-core` to `phoenix`.
+4. Do not initialize a separate empty `phoenix` repository before transfer.
+5. Do not delete the original repository or history manually; GitHub transfer should preserve continuity and redirects.
+
+Target after this gate:
+
+`phoenx-online/phoenix`
 
 ## Gate 3 — Preserve repository history
 
-Historical source repository:
+Historical source repository before transfer:
 
 `melvin826/phoenix-enterprise-core`
 
-Preferred migration methods, in order:
-
-1. GitHub repository transfer from the personal account into `phoenx-online`, followed by repository rename to `phoenix`, if transfer permissions and visibility are appropriate.
-2. If transfer is unsuitable, mirror-push all refs/tags to `phoenx-online/phoenix` and verify commit/tag parity before declaring the old repository historical.
-
-Never delete the old repository until the migration gate is fully verified.
+Preferred migration method is GitHub native repository transfer. If native transfer proves unsuitable, use a mirror migration only after documenting why transfer cannot be used.
 
 ## Gate 4 — Verification
 
-Verify:
+After the transfer is visible to the connector, verify:
 
+- repository owner is `phoenx-online`
+- repository name is `phoenix`
 - complete commit history preserved
 - default branch correct
+- branches preserved
 - tags preserved
-- open issues / PRs handled deliberately
+- issues / PR history preserved or deliberately handled
 - Actions workflows reviewed before enabling
 - repository visibility intentionally selected
 - no legacy secrets transferred blindly
@@ -115,9 +127,9 @@ Before DNS cutover:
 
 Only after migration verification:
 
-- update old repository README to point to `phoenx-online/phoenix`
-- optionally archive the old repository if it remains separate
-- never delete it solely for cleanup unless history and references are conclusively preserved
+- ensure old GitHub URLs redirect to `phoenx-online/phoenix`
+- update references that should use the new canonical URL
+- do not delete history solely for cleanup
 
 ## Explicit non-goals for PHX-M0
 
