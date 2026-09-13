@@ -1,19 +1,21 @@
-# PHOENX GitHub Organization + Domain Migration Plan
+# PHOENIX GitHub Organization + Domain Migration Plan
 
 Status: PHX-M0 execution plan
 
 ## Goal
 
-Move PHOENX from the historical personal repository into an independent GitHub organization while preserving Git history and keeping Craniumtek, Morning Breaks Global, and iBayong untouched.
+Move PHOENIX from the historical personal repository into an independent GitHub organization while preserving Git history and keeping Craniumtek, Morning Breaks Global, and iBayong untouched.
 
 ## Target identity
 
-- Product / brand: PHOENX
+- Product / brand: **PHOENIX**
 - Primary domain: `phoenx.online`
 - GitHub organization display name: **PHOENIX**
-- GitHub organization account handle: choose an available handle at creation time; `phoenix` may be attempted, otherwise prefer a clear available alternative such as `phoenx`
-- Initial canonical repository name: `phoenx`
-- Canonical repository path: `<github-org-handle>/phoenx`
+- GitHub organization account handle: choose an available handle at creation time; prefer `phoenix` if available, otherwise use a clear available alternative such as `phoenx`
+- Initial canonical repository name: `phoenix`
+- Canonical repository path: `<github-org-handle>/phoenix`
+
+The product/brand spelling and domain spelling are intentionally different and must not be normalized automatically.
 
 ## Gate 1 — Create organization
 
@@ -31,7 +33,7 @@ Recommended settings:
 
 ## Gate 2 — Create canonical repository
 
-Inside the new **PHOENIX** organization, create a private repository named `phoenx` initially unless public-source publication is explicitly intended.
+Inside the new **PHOENIX** organization, create a private repository named `phoenix` initially unless public-source publication is explicitly intended.
 
 Do not initialize it with unrelated scaffold content if the migration will push existing Git history into it.
 
@@ -43,7 +45,7 @@ The historical source repository is:
 
 Preferred migration methods, in order:
 
-1. GitHub repository transfer from the personal account into the PHOENIX organization, followed by a repository rename to `phoenx`, if transfer permissions and desired visibility allow it.
+1. GitHub repository transfer from the personal account into the PHOENIX organization, followed by a repository rename to `phoenix`, if transfer permissions and desired visibility allow it.
 2. If transfer is unsuitable, mirror-push all refs/tags to the new canonical repository and verify commit/tag parity before declaring the old repository historical.
 
 Never delete the old repository until the migration gate is fully verified.
@@ -62,20 +64,21 @@ Verify:
 - no hard-coded placeholder credentials retained as active configuration
 - `SOURCE_OF_TRUTH.md` and `ADR-0001` exist in canonical repo
 - organization display name is **PHOENIX**
+- product / brand is **PHOENIX**
 - website/domain reference is `phoenx.online`
 
 ## Gate 5 — Runtime separation
 
-PHOENX runtime should use dedicated resources:
+PHOENIX runtime should use dedicated resources:
 
-- Linux user: `phoenix` or `phoenx` when operationally practical
-- dedicated project path, e.g. `/srv/phoenx`
-- Docker project name: `phoenx`
-- PostgreSQL database: dedicated PHOENX database
-- PHOENX-only environment/secrets
-- PHOENX-only object storage namespace
-- PHOENX-only backup repository/path
-- PHOENX self-hosted GitHub Actions runner
+- Linux user: `phoenix` when operationally practical
+- dedicated project path, e.g. `/srv/phoenix`
+- Docker project name: `phoenix`
+- PostgreSQL database: dedicated PHOENIX database
+- PHOENIX-only environment/secrets
+- PHOENIX-only object storage namespace
+- PHOENIX-only backup repository/path
+- PHOENIX self-hosted GitHub Actions runner
 
 Do not share MBG or iBayong production credentials, containers, volumes, or deployment jobs.
 
