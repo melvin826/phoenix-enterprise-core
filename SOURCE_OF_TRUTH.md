@@ -1,20 +1,20 @@
-# PHOENX Source of Truth
+# PHOENIX Source of Truth
 
 Status: APPROVED BASELINE — PHX-M0
 
 ## Product identity
 
-- Product name: **PHOENX**
+- Product name: **PHOENIX**
 - Primary domain: **phoenx.online**
 - Category: **Live Commerce Growth Operating System**
 - Positioning: One system for stores, creators, content, media buying, live selling, attribution, finance, and profitable growth.
 - Technology / engineering incubator: **Craniumtek Solutions Inc.**
 
-PHOENX is a separate product boundary. It is not a module of Craniumtek corporate systems, Morning Breaks Global, or iBayong.
+PHOENIX is a separate product boundary. It is not a module of Craniumtek corporate systems, Morning Breaks Global, or iBayong.
 
 ## Separation policy
 
-PHOENX SHALL have independent:
+PHOENIX SHALL have independent:
 
 - GitHub organization and canonical repository
 - application source tree
@@ -33,13 +33,13 @@ Cross-product interaction with Craniumtek, Morning Breaks Global, and iBayong SH
 ## Relationship to other products
 
 ### Craniumtek Solutions Inc.
-Craniumtek is PHOENX's technology / engineering incubator and may own, build, operate, support, or commercialize PHOENX. PHOENX remains product-operationally independent.
+Craniumtek is PHOENIX's technology / engineering incubator and may own, build, operate, support, or commercialize PHOENIX. PHOENIX remains product-operationally independent.
 
 ### Morning Breaks Global
-MBG is an external client/integration from PHOENX's perspective. MBG-specific teachers, students, classes, packages, and education workflows SHALL NOT become PHOENX domain models.
+MBG is an external client/integration from PHOENIX's perspective. MBG-specific teachers, students, classes, packages, and education workflows SHALL NOT become PHOENIX domain models.
 
 ### iBayong
-iBayong is an external marketplace/integration from PHOENX's perspective. iBayong buyer, seller, marketplace listing, and marketplace transaction records SHALL remain in iBayong. PHOENX may consume approved commerce data through integration contracts.
+iBayong is an external marketplace/integration from PHOENIX's perspective. iBayong buyer, seller, marketplace listing, and marketplace transaction records SHALL remain in iBayong. PHOENIX may consume approved commerce data through integration contracts.
 
 ## Six product pillars
 
@@ -52,9 +52,9 @@ iBayong is an external marketplace/integration from PHOENX's perspective. iBayon
 
 ## V1 wedge
 
-The deepest V1 capability is **Live Selling Operations**, connected to creators, content, media buying, products/orders, and an attribution ledger. PHOENX should not attempt to become a general ERP or consumer marketplace in V1.
+The deepest V1 capability is **Live Selling Operations**, connected to creators, content, media buying, products/orders, and an attribution ledger. PHOENIX should not attempt to become a general ERP or consumer marketplace in V1.
 
-## Canonical shared PHOENX entities
+## Canonical shared PHOENIX entities
 
 - organizations
 - brands
@@ -96,7 +96,7 @@ The existing November 2025 repository scaffold is historical and is NOT automati
 
 ## Domain baseline
 
-Primary brand/domain identity:
+Primary product/domain identity:
 
 - `phoenx.online` — public product domain
 - `www.phoenx.online` — public marketing site if required
@@ -104,19 +104,21 @@ Primary brand/domain identity:
 - `api.phoenx.online` — API when required
 - `admin.phoenx.online` — platform administration when separation is justified
 
+The intentional spelling difference is authoritative: the **product/brand is PHOENIX**, while the **domain is phoenx.online**.
+
 Subdomains SHALL only be activated when the corresponding service exists and is independently secured.
 
 ## GitHub target
 
 Canonical GitHub organization display name: **PHOENIX**.
 
-The GitHub organization account handle / URL slug is a separate value and SHALL be selected based on availability at organization creation time. Do not infer the account handle from the display name. If `phoenix` is unavailable, an available handle such as `phoenx` may be used while keeping the organization display name **PHOENIX**.
+The GitHub organization account handle / URL slug is a separate value and SHALL be selected based on availability at organization creation time. Prefer `phoenix` when available; if it is unavailable, an available handle such as `phoenx` may be used while keeping the organization display name **PHOENIX**.
 
 Initial canonical repository should stay simple, preferably a single modular-monolith repository named:
 
-- `phoenx`
+- `phoenix`
 
-Canonical repository path will therefore be `<github-org-handle>/phoenx`.
+Canonical repository path will therefore be `<github-org-handle>/phoenix`.
 
 Additional repositories should be created only when a concrete ownership, release, security, or lifecycle boundary justifies them.
 

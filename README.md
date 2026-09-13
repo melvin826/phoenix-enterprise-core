@@ -1,6 +1,8 @@
-# PHOENX — Source-of-Truth Recovery
+# PHOENIX — Source-of-Truth Recovery
 
-> This repository began as the November 2025 `phoenix-enterprise-core` scaffold. The product has since evolved into **PHOENX — the Live Commerce Growth Operating System**.
+> This repository began as the November 2025 `phoenix-enterprise-core` scaffold. The product has since evolved into **PHOENIX — the Live Commerce Growth Operating System**.
+
+Product / brand: **PHOENIX**
 
 Primary domain: **phoenx.online**
 
@@ -16,11 +18,11 @@ Read these before using any legacy scaffold or deployment file:
 - `docs/decisions/ADR-0001-product-independence.md`
 - `MIGRATION_PLAN.md`
 
-The historical Docker, Nginx, MariaDB/MySQL, CI/CD, and Droplet deployment files in this repository are **not automatically approved for current PHOENX runtime use**. They require explicit revalidation against the current source of truth.
+The historical Docker, Nginx, MariaDB/MySQL, CI/CD, and Droplet deployment files in this repository are **not automatically approved for current PHOENIX runtime use**. They require explicit revalidation against the current source of truth.
 
 ## Product boundary
 
-PHOENX is operationally separate from:
+PHOENIX is operationally separate from:
 
 - Craniumtek corporate systems
 - Morning Breaks Global
@@ -30,11 +32,15 @@ Integrations with those products must use explicit APIs/events/contracts rather 
 
 ## Migration target
 
-The intended end state is a dedicated **PHOENIX GitHub organization** with a canonical PHOENX repository while preserving the full history of this legacy repository.
+The intended end state is a dedicated **PHOENIX GitHub organization** with a canonical PHOENIX repository while preserving the full history of this legacy repository.
 
-The organization display name and product domain are intentionally distinct values:
+The canonical identity is intentionally:
 
 - GitHub organization display name: **PHOENIX**
-- Product domain: **phoenx.online**
+- Product / brand: **PHOENIX**
+- Primary domain: **phoenx.online**
+- Technology / engineering incubator: **Craniumtek Solutions Inc.**
+
+The spelling difference between **PHOENIX** and `phoenx.online` is intentional and authoritative.
 
 No production deployment is authorized by this documentation change.
