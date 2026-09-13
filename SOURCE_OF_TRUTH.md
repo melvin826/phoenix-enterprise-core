@@ -116,6 +116,8 @@ Canonical GitHub organization account handle / URL slug: **`phoenx-online`**.
 
 Canonical organization URL: **`https://github.com/phoenx-online`**.
 
+The GitHub app/connector is installed and authorized for the `phoenx-online` organization.
+
 Initial canonical repository should stay simple, preferably a single modular-monolith repository named:
 
 - `phoenix`
@@ -128,6 +130,6 @@ Additional repositories should be created only when a concrete ownership, releas
 
 The historical `melvin826/phoenix-enterprise-core` repository SHALL be preserved until a verified migration transfers all required Git history and source-of-truth content into the new **PHOENIX** GitHub organization repository.
 
-The GitHub connector/app must be explicitly installed or authorized for the `phoenx-online` organization before automated repository migration or management can proceed.
+Current migration gate: the GitHub connector can manage repositories after they exist in `phoenx-online`, but it does not expose repository-transfer or repository-creation administration. The owner must therefore complete the one-time repository transfer in GitHub UI. After transfer, automated verification and repository management may continue through the connector.
 
 No production deployment is authorized by this source-of-truth update alone.
