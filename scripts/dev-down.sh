@@ -2,6 +2,7 @@
 set -Eeuo pipefail
 
 ENV_FILE="${1:-.env.dev}"
+if (( $# > 0 )); then shift; fi
 
 [[ -f "$ENV_FILE" ]] || { echo "Missing $ENV_FILE" >&2; exit 1; }
 
