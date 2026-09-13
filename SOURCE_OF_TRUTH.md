@@ -108,16 +108,20 @@ Subdomains SHALL only be activated when the corresponding service exists and is 
 
 ## GitHub target
 
-Target organization: **PHOENX** (subject to GitHub handle availability at creation time).
+Canonical GitHub organization display name: **PHOENIX**.
 
-Initial canonical repository target should stay simple, preferably a single modular-monolith repository such as:
+The GitHub organization account handle / URL slug is a separate value and SHALL be selected based on availability at organization creation time. Do not infer the account handle from the display name. If `phoenix` is unavailable, an available handle such as `phoenx` may be used while keeping the organization display name **PHOENIX**.
 
-- `phoenx/phoenx`
+Initial canonical repository should stay simple, preferably a single modular-monolith repository named:
+
+- `phoenx`
+
+Canonical repository path will therefore be `<github-org-handle>/phoenx`.
 
 Additional repositories should be created only when a concrete ownership, release, security, or lifecycle boundary justifies them.
 
 ## Migration rule
 
-The historical `melvin826/phoenix-enterprise-core` repository SHALL be preserved until a verified migration transfers all required Git history and source-of-truth content into the new PHOENX organization repository.
+The historical `melvin826/phoenix-enterprise-core` repository SHALL be preserved until a verified migration transfers all required Git history and source-of-truth content into the new **PHOENIX** GitHub organization repository.
 
 No production deployment is authorized by this source-of-truth update alone.
