@@ -8,10 +8,12 @@ Move PHOENX from the historical personal repository into an independent GitHub o
 
 ## Target identity
 
-- Brand: PHOENX
+- Product / brand: PHOENX
 - Primary domain: `phoenx.online`
-- Target GitHub organization: `PHOENX` / `phoenx` handle if available
-- Initial canonical repository: `phoenx/phoenx`
+- GitHub organization display name: **PHOENIX**
+- GitHub organization account handle: choose an available handle at creation time; `phoenix` may be attempted, otherwise prefer a clear available alternative such as `phoenx`
+- Initial canonical repository name: `phoenx`
+- Canonical repository path: `<github-org-handle>/phoenx`
 
 ## Gate 1 — Create organization
 
@@ -19,8 +21,9 @@ Create the GitHub organization from the GitHub UI because the currently connecte
 
 Recommended settings:
 
-- organization display name: PHOENX
-- organization handle: `phoenx` if available
+- organization display name: **PHOENIX**
+- organization handle / URL slug: select based on actual GitHub availability; do not treat it as the same field as the display name
+- website: `https://phoenx.online`
 - billing: Free unless a paid capability is explicitly required
 - base repository permission: None or Read
 - require 2FA for organization members when feasible
@@ -28,7 +31,7 @@ Recommended settings:
 
 ## Gate 2 — Create canonical repository
 
-Inside the new organization, create a private repository named `phoenx` initially unless public-source publication is explicitly intended.
+Inside the new **PHOENIX** organization, create a private repository named `phoenx` initially unless public-source publication is explicitly intended.
 
 Do not initialize it with unrelated scaffold content if the migration will push existing Git history into it.
 
@@ -40,7 +43,7 @@ The historical source repository is:
 
 Preferred migration methods, in order:
 
-1. GitHub repository transfer from the personal account into the PHOENX organization, followed by a repository rename to `phoenx`, if transfer permissions and desired visibility allow it.
+1. GitHub repository transfer from the personal account into the PHOENIX organization, followed by a repository rename to `phoenx`, if transfer permissions and desired visibility allow it.
 2. If transfer is unsuitable, mirror-push all refs/tags to the new canonical repository and verify commit/tag parity before declaring the old repository historical.
 
 Never delete the old repository until the migration gate is fully verified.
@@ -58,12 +61,14 @@ Verify:
 - no legacy secrets transferred blindly
 - no hard-coded placeholder credentials retained as active configuration
 - `SOURCE_OF_TRUTH.md` and `ADR-0001` exist in canonical repo
+- organization display name is **PHOENIX**
+- website/domain reference is `phoenx.online`
 
 ## Gate 5 — Runtime separation
 
 PHOENX runtime should use dedicated resources:
 
-- Linux user: `phoenix` or renamed `phoenx` when operationally practical
+- Linux user: `phoenix` or `phoenx` when operationally practical
 - dedicated project path, e.g. `/srv/phoenx`
 - Docker project name: `phoenx`
 - PostgreSQL database: dedicated PHOENX database
@@ -98,7 +103,7 @@ Before DNS cutover:
 
 Only after migration verification:
 
-- update old repository README to point to the canonical PHOENX organization repository
+- update old repository README to point to the canonical PHOENIX organization repository
 - optionally archive the old repository if it remains separate
 - never delete it solely for cleanup unless history and references are conclusively preserved
 
