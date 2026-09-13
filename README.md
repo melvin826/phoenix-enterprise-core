@@ -1,24 +1,24 @@
-# PHOENIX — Source-of-Truth Recovery
+# PHOENIX — Live Commerce Growth Operating System
 
-> This repository began as the November 2025 `phoenix-enterprise-core` scaffold. The product has since evolved into **PHOENIX — the Live Commerce Growth Operating System**.
+PHOENIX is an independent Craniumtek-incubated product for stores, creators, content, media buying, live selling, attribution, finance, and profitable growth.
 
-Product / brand: **PHOENIX**
+- **Product / brand:** PHOENIX
+- **Primary domain:** `phoenx.online`
+- **Canonical GitHub organization:** `phoenx-online`
+- **Canonical repository:** `phoenx-online/phoenix`
+- **Technology / engineering incubator:** Craniumtek Solutions Inc.
 
-Primary domain: **phoenx.online**
-
-GitHub organization display name: **PHOENIX**
-
-Technology / engineering incubator: **Craniumtek Solutions Inc.**
+The spelling difference between **PHOENIX** and `phoenx.online` is intentional.
 
 ## Current authority
 
-Read these before using any legacy scaffold or deployment file:
+Read these before using any historical runtime or deployment artifact:
 
 - `SOURCE_OF_TRUTH.md`
-- `docs/decisions/ADR-0001-product-independence.md`
 - `MIGRATION_PLAN.md`
-
-The historical Docker, Nginx, MariaDB/MySQL, CI/CD, and Droplet deployment files in this repository are **not automatically approved for current PHOENIX runtime use**. They require explicit revalidation against the current source of truth.
+- `DEV_RUNTIME_BASELINE.md`
+- `SECURITY_AUDIT.md`
+- `docs/decisions/ADR-0001-product-independence.md`
 
 ## Product boundary
 
@@ -28,19 +28,18 @@ PHOENIX is operationally separate from:
 - Morning Breaks Global
 - iBayong
 
-Integrations with those products must use explicit APIs/events/contracts rather than shared databases, secrets, repositories, or deployment pipelines.
+Integrations must use explicit APIs, events, webhooks, imports/exports, or documented contracts rather than shared application databases, runtime secrets, or deployment jobs.
 
-## Migration target
+## Repository status
 
-The intended end state is a dedicated **PHOENIX GitHub organization** with a canonical PHOENIX repository while preserving the full history of this legacy repository.
+The original personal repository was transferred natively into the dedicated PHOENIX organization and renamed to this canonical repository. GitHub repository ID `1094814392` was preserved through transfer and rename, along with branch and PR continuity.
 
-The canonical identity is intentionally:
+The obsolete historical GitHub Actions workflow that auto-deployed every `main` push to a DigitalOcean droplet has been removed.
 
-- GitHub organization display name: **PHOENIX**
-- Product / brand: **PHOENIX**
-- Primary domain: **phoenx.online**
-- Technology / engineering incubator: **Craniumtek Solutions Inc.**
+## Runtime warning
 
-The spelling difference between **PHOENIX** and `phoenx.online` is intentional and authoritative.
+The remaining November 2025 Docker, MariaDB/MySQL, Nginx, environment, and deployment artifacts are historical. They are **not approved as the current PHOENIX runtime definition** and must be modernized before execution.
 
-No production deployment is authorized by this documentation change.
+The approved target architecture is a Laravel modular monolith with PostgreSQL, Redis where justified, Docker-isolated environments, self-hosted GitHub Actions, and separate DEV/staging/production boundaries.
+
+No production deployment or DNS cutover is authorized by the current repository state.
