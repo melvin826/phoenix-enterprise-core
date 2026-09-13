@@ -1,20 +1,16 @@
 # PHOENIX GitHub Organization + Domain Migration Plan
 
-Status: PHX-M0 execution plan
+Status: PHX-M0.6 — repository migration complete; DEV preparation next
 
-## Goal
-
-Move PHOENIX from the historical personal repository into an independent GitHub organization while preserving Git history and keeping Craniumtek, Morning Breaks Global, and iBayong untouched.
-
-## Target identity
+## Canonical identity
 
 - Product / brand: **PHOENIX**
 - Primary domain: `phoenx.online`
 - GitHub organization display name: **PHOENIX**
-- GitHub organization account handle: **`phoenx-online`**
-- GitHub organization URL: **`https://github.com/phoenx-online`**
-- Canonical repository name: `phoenix`
-- Canonical repository path: **`phoenx-online/phoenix`**
+- GitHub organization handle: **`phoenx-online`**
+- Canonical repository: **`phoenx-online/phoenix`**
+- Repository numeric ID: **`1094814392`**
+- Default branch: `main`
 
 The product/brand spelling and domain spelling are intentionally different and must not be normalized automatically.
 
@@ -22,24 +18,9 @@ The product/brand spelling and domain spelling are intentionally different and m
 
 **COMPLETED.** The organization exists at `github.com/phoenx-online`.
 
-Canonical organization settings:
-
-- organization display name: **PHOENIX**
-- organization handle / URL slug: **`phoenx-online`**
-- website: `https://phoenx.online`
-- billing: Free unless a paid capability is explicitly required
-- base repository permission: None or Read
-- require 2FA for organization members when feasible
-- do not invite contractors before teams/permissions are defined
-
 ## Gate 1A — Connect GitHub integration
 
-**COMPLETED.** The GitHub app/connector is installed and authorized for `phoenx-online` with repository access enabled.
-
-Verified state:
-
-- organization installation exists
-- repository selection: all repositories
+**COMPLETED.** The GitHub app/connector is installed and authorized for `phoenx-online`.
 
 ## Gate 2 — Transfer canonical repository
 
@@ -51,50 +32,33 @@ into:
 
 `phoenx-online/phoenix-enterprise-core`
 
-Transfer continuity evidence:
-
-- GitHub repository numeric ID remained **`1094814392`**.
-- default branch remains `main`.
-- latest verified pre-PHX-M0.5 `main` commit is `0a39b812aa076c8fe041caf45c76878eabc821a6`.
-- six expected branches are visible after transfer.
-- PR history #1–#5 is preserved under `phoenx-online`.
-- old owner/repository lookup resolves to the transferred repository.
-- repository remains public at this stage.
+The repository numeric ID remained `1094814392`, confirming continuity rather than recreation.
 
 ## Gate 2A — Remove obsolete executable deployment path
 
-**IN PROGRESS IN PHX-M0.5.**
+**COMPLETED.** `.github/workflows/deploy.yml` was physically removed before further main-branch development.
 
-The transferred repository still contained `.github/workflows/deploy.yml`, which automatically deployed every `main` push to a DigitalOcean droplet using:
-
-- `runs-on: ubuntu-latest`
-- SSH as `root`
-- legacy `/var/www/phoenix` path
-- legacy Droplet secrets
-- permissive `|| true` deployment steps
-
-This workflow is historical and not authorized for the current PHOENIX architecture. PHX-M0.5 physically removes it before further `main` development work.
+That historical workflow had automatically deployed every `main` push to a DigitalOcean droplet using a GitHub-hosted runner, root SSH, legacy `/var/www/phoenix` assumptions, and permissive deployment commands. It is not part of the current PHOENIX architecture.
 
 ## Gate 3 — Preserve repository history
 
-**VERIFIED FOR COMMITS / BRANCHES / PRs.**
+**VERIFIED for the available continuity signals.**
 
-Verified:
+Verified after transfer:
 
-- repository identity continuity via unchanged repository ID
-- commit history from the November 2025 initial commit through PHX-M0.4 is visible under the new organization
-- expected branches preserved
-- PRs #1–#5 preserved
+- repository numeric ID unchanged
 - default branch preserved
-- old repository path resolves to the transferred repository
+- commit history remains visible from the November 2025 initial commit onward
+- expected branches preserved
+- PRs #1 through #6 preserved
+- former personal repository path resolves to the canonical repository chain
+- no destructive history rewrite performed
 
-Tag enumeration is not independently exposed by the current connector action set. No tag deletion, rewrite, or destructive cleanup is authorized.
+Tag enumeration was not independently available through the current connector action set. No destructive tag operation is authorized.
 
 ## Gate 4 — Rename repository to canonical name
 
-**CURRENT OWNER/UI GATE.** The connector does not expose repository rename administration.
-
-Rename:
+**COMPLETED.** Repository renamed from:
 
 `phoenx-online/phoenix-enterprise-core`
 
@@ -102,78 +66,95 @@ to:
 
 `phoenx-online/phoenix`
 
-Use GitHub repository **Settings → General → Repository name**.
-
-Do not create a second repository. Rename the transferred repository itself so repository ID, history, PRs, branches, redirects, and continuity remain intact.
-
 ## Gate 4A — Post-rename verification
 
-After rename is visible to the connector, verify:
+**COMPLETED.** Verified:
 
 - repository owner is `phoenx-online`
 - repository name is `phoenix`
 - repository ID remains `1094814392`
-- default branch is `main`
+- default branch remains `main`
 - branches remain intact
 - PR history remains intact
-- old personal and pre-rename URLs redirect correctly
-- `SOURCE_OF_TRUTH.md` and `docs/decisions/ADR-0001-product-independence.md` exist
+- old personal URL resolves to `phoenx-online/phoenix`
+- pre-rename organization URL resolves to `phoenx-online/phoenix`
+- `SOURCE_OF_TRUTH.md` remains present
 - `.github/workflows/deploy.yml` is absent
-- no legacy deployment workflow is active
-- repository visibility is deliberately accepted or changed through an explicit later decision
-- product / brand remains **PHOENIX**
-- website/domain remains `phoenx.online`
+- repository remains public pending an explicit visibility decision
 
-## Gate 5 — Runtime separation
+## Gate 5 — Independent DEV preparation
 
-PHOENIX runtime should use dedicated resources:
+**CURRENT ENGINEERING GATE.** Follow `DEV_RUNTIME_BASELINE.md`.
 
-- Linux user: `phoenix` when operationally practical
-- dedicated project path, e.g. `/srv/phoenix`
-- Docker project name: `phoenix`
-- PostgreSQL database: dedicated PHOENIX database
-- PHOENIX-only environment/secrets
-- PHOENIX-only object storage namespace
-- PHOENIX-only backup repository/path
-- PHOENIX self-hosted GitHub Actions runner
+Before starting an executable DEV runtime:
 
-Do not share MBG or iBayong production credentials, containers, volumes, or deployment jobs.
+1. Verify the intended development host and available CPU, RAM, storage, Docker, network, and backup capacity.
+2. Confirm PHOENIX gets an isolated Linux/service account or equivalent least-privilege boundary.
+3. Clone only the canonical repository `phoenx-online/phoenix`.
+4. Use a PHOENIX-only project path, database, Redis boundary, secrets, Docker namespace, runner, logs, and backups.
+5. Modernize the legacy runtime scaffold before bringing it up.
+6. Replace MariaDB/MySQL assumptions with the approved PostgreSQL baseline unless a later ADR supersedes this decision.
+7. Do not expose DEV directly on public ports 80/443 by default.
+8. Use self-hosted GitHub Actions for PHOENIX CI/CD; do not reintroduce GitHub-hosted deployment jobs as the default path.
+9. Add a test/health gate before any staging or production environment is considered.
 
-## Gate 6 — Domain activation
+## Gate 6 — Repository visibility decision
 
-Use `phoenx.online` as the primary public domain.
+**PENDING DELIBERATE OWNER DECISION.** The repository is currently public.
 
-Recommended service mapping:
+Do not change visibility automatically. Before choosing public vs private, review:
+
+- whether any current or historical files expose internal architecture that should not be public
+- whether secrets were ever committed historically
+- intended open-source/commercial licensing strategy
+- whether public source materially helps customer acquisition or product trust
+- whether private source better protects unreleased commercial implementation
+
+If visibility changes, verify repository access, GitHub App access, Actions, forks, and external links afterward.
+
+## Gate 7 — Staging
+
+**NOT STARTED.** Staging requires:
+
+- modernized application scaffold
+- green DEV tests
+- independent secrets
+- staging database and Redis
+- isolated staging Docker project
+- staging self-hosted runner or an explicitly approved isolated runner strategy
+- rollback and backup/restore evidence
+
+## Gate 8 — Production
+
+**NOT AUTHORIZED.** Production requires a separate capacity and security gate.
+
+Production must not reuse MBG or iBayong credentials, database volumes, deployment jobs, or application secrets. Shared physical hardware may be considered only if resource capacity, blast-radius isolation, backups, monitoring, and rollback are verified.
+
+## Gate 9 — Domain activation
+
+Use `phoenx.online` as the primary public domain only after the corresponding secured runtime exists.
+
+Recommended mapping:
 
 - `phoenx.online` / `www.phoenx.online` -> public site
 - `app.phoenx.online` -> application
-- `api.phoenx.online` -> API only when needed
-- `admin.phoenx.online` -> admin surface only when separately justified
+- `api.phoenx.online` -> API only when required
+- `admin.phoenx.online` -> administration only when a separate surface is justified
 
 Before DNS cutover:
 
-- confirm domain registrar ownership/access
-- identify DNS provider
-- configure TLS through the selected edge/reverse-proxy approach
-- verify no existing production service is displaced
-- use least-privilege origin exposure
-- validate HTTP redirects and canonical host
+- confirm registrar and DNS-provider control
+- configure TLS
+- verify origin isolation
+- verify canonical redirects
+- ensure no existing service is displaced
+- complete application health checks and rollback preparation
 
-## Gate 7 — Historical repository retirement
-
-Native transfer means the repository history itself moved; there is no separate recreated canonical repository to delete.
-
-After rename verification:
-
-- ensure old GitHub URLs redirect to `phoenx-online/phoenix`
-- update references that should use the new canonical URL
-- do not delete or rewrite history solely for cleanup
-
-## Explicit non-goals for PHX-M0
+## Explicit non-goals for PHX-M0.6
 
 - no production deployment
+- no DNS cutover
 - no MBG changes
 - no iBayong changes
 - no Craniumtek production changes
-- no DNS cutover until ownership and target runtime are verified
-- no activation of legacy Docker/deploy scaffold
+- no activation of the historical Docker/deploy scaffold without modernization
