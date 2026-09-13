@@ -11,42 +11,49 @@ Move PHOENIX from the historical personal repository into an independent GitHub 
 - Product / brand: **PHOENIX**
 - Primary domain: `phoenx.online`
 - GitHub organization display name: **PHOENIX**
-- GitHub organization account handle: choose an available handle at creation time; prefer `phoenix` if available, otherwise use a clear available alternative such as `phoenx`
+- GitHub organization account handle: **`phoenx-online`**
+- GitHub organization URL: **`https://github.com/phoenx-online`**
 - Initial canonical repository name: `phoenix`
-- Canonical repository path: `<github-org-handle>/phoenix`
+- Canonical repository path: **`phoenx-online/phoenix`**
 
 The product/brand spelling and domain spelling are intentionally different and must not be normalized automatically.
 
 ## Gate 1 — Create organization
 
-Create the GitHub organization from the GitHub UI because the currently connected GitHub integration does not expose organization-creation administration.
+**COMPLETED.** The organization exists at `github.com/phoenx-online`.
 
-Recommended settings:
+Canonical organization settings:
 
 - organization display name: **PHOENIX**
-- organization handle / URL slug: select based on actual GitHub availability; do not treat it as the same field as the display name
+- organization handle / URL slug: **`phoenx-online`**
 - website: `https://phoenx.online`
 - billing: Free unless a paid capability is explicitly required
 - base repository permission: None or Read
 - require 2FA for organization members when feasible
 - do not invite contractors before teams/permissions are defined
 
-## Gate 2 — Create canonical repository
+## Gate 1A — Connect GitHub integration
 
-Inside the new **PHOENIX** organization, create a private repository named `phoenix` initially unless public-source publication is explicitly intended.
+**CURRENT BLOCKER.** The connected GitHub app is not yet installed/authorized for the `phoenx-online` organization.
 
-Do not initialize it with unrelated scaffold content if the migration will push existing Git history into it.
+Before automated migration, install/authorize the GitHub integration for this organization and grant access to the repository that will become canonical. Do not grant access to unrelated repositories unless needed.
+
+## Gate 2 — Canonical repository
+
+Preferred target is a private repository named `phoenix` inside the **PHOENIX** organization unless public-source publication is explicitly intended.
+
+Do not initialize an unrelated scaffold if the historical repository will be transferred or mirror-migrated into it.
 
 ## Gate 3 — Preserve repository history
 
-The historical source repository is:
+Historical source repository:
 
 `melvin826/phoenix-enterprise-core`
 
 Preferred migration methods, in order:
 
-1. GitHub repository transfer from the personal account into the PHOENIX organization, followed by a repository rename to `phoenix`, if transfer permissions and desired visibility allow it.
-2. If transfer is unsuitable, mirror-push all refs/tags to the new canonical repository and verify commit/tag parity before declaring the old repository historical.
+1. GitHub repository transfer from the personal account into `phoenx-online`, followed by repository rename to `phoenix`, if transfer permissions and visibility are appropriate.
+2. If transfer is unsuitable, mirror-push all refs/tags to `phoenx-online/phoenix` and verify commit/tag parity before declaring the old repository historical.
 
 Never delete the old repository until the migration gate is fully verified.
 
@@ -64,6 +71,8 @@ Verify:
 - no hard-coded placeholder credentials retained as active configuration
 - `SOURCE_OF_TRUTH.md` and `ADR-0001` exist in canonical repo
 - organization display name is **PHOENIX**
+- organization handle is **`phoenx-online`**
+- canonical repository is **`phoenx-online/phoenix`**
 - product / brand is **PHOENIX**
 - website/domain reference is `phoenx.online`
 
@@ -106,7 +115,7 @@ Before DNS cutover:
 
 Only after migration verification:
 
-- update old repository README to point to the canonical PHOENIX organization repository
+- update old repository README to point to `phoenx-online/phoenix`
 - optionally archive the old repository if it remains separate
 - never delete it solely for cleanup unless history and references are conclusively preserved
 
